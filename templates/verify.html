@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>VoteGuard - Verify</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+			font-family: 'Poppins', sans-serif;
+			overflow-x: hidden;
+			background-color: rgba(0, 70, 0, 1);
+		}
+
+		header {
+			background-color: #ffffff;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.btn-login {
+			background-color: rgba(148, 195, 88, 1);
+			color: #ffffff;
+			font-size: 16px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			display: block;
+			margin-bottom: 5px;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		#content-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			max-width: 600px;
+			margin: 60px auto;
+			background: #ffffff;
+			border-radius: 10px;
+			padding: 40px;
+			box-sizing: border-box;
+		}
+
+		#voting_panel {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 700;
+			font-size: 32px;
+			color: rgba(0, 70, 0, 1);
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		#subtext {
+			color: #555;
+			text-align: center;
+			margin-bottom: 15px;
+			font-size: 14px;
+		}
+
+		#challenge-box {
+			background-color: rgba(0, 70, 0, 0.06);
+			border: 2px solid rgba(0, 70, 0, 1);
+			color: rgba(0, 70, 0, 1);
+			font-weight: bold;
+			font-size: 18px;
+			padding: 10px 20px;
+			border-radius: 8px;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		#camera-wrap {
+			position: relative;
+			width: 320px;
+			height: 240px;
+			border-radius: 10px;
+			overflow: hidden;
+			background: #000;
+			margin-bottom: 20px;
+		}
+
+		#video {
+			width: 320px;
+			height: 240px;
+			object-fit: cover;
+			display: block;
+		}
+
+		#capture-progress {
+			font-size: 14px;
+			color: rgba(0, 70, 0, 1);
+			font-weight: bold;
+			margin-bottom: 15px;
+			min-height: 20px;
+			text-align: center;
+		}
+
+		#status-error {
+			color: #b00020;
+			font-size: 14px;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+
+		#sub, #start-btn {
+			background-color: rgba(133, 198, 72, 1);
+			color: #ffffff;
+			font-family: Poppins;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 12px 32px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		#sub:disabled, #start-btn:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header style="font-size: 16px;">
+		<div class="title" style="position: relative;">
+			<a href="/" style="text-decoration: none;">VoteGuard</a>
+		</div>
+		<div style="display: flex; align-items: center; position: relative;">
+			<div style="display: flex; position: relative; gap: 10px; margin-bottom: -7px;">
+				<a href="https://drive.google.com/drive/folders/1tntLUocVSIpiVYBc1T5kuSkSxqhMTKvj?usp=sharing"
+					class="nav-link" style="margin-right: 10px;">About us</a>
+				<a href="https://youtu.be/5RaClayE1nM" class="nav-link" style="margin-right: 10px;">How to Vote</a>
+			</div>
+			<button class="btn-login" style="margin-left: 10px;"><a href="/logout"
+					style="color:#fff;">Logout</a></button>
+		</div>
+	</header>
+
+	<div id="content-container">
+		<div id="voting_panel">Let's Verify You</div>
+		<div id="subtext">Complete the challenge below so we know it's really you, live, before you vote.</div>
+
+		<div id="challenge-box">{{ challenge_label }}</div>
+
+		{% if error %}
+		<div id="status-error">{{ error }}</div>
+		{% endif %}
+
+		<div id="camera-wrap">
+			<video id="video" autoplay playsinline muted></video>
+		</div>
+		<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+		<div id="capture-progress">Position your face in frame, then click Start</div>
+
+		<form action="{{ url_for('verify', poll_id=poll_id) }}" method="POST" id="verify-form">
+			<input type="hidden" name="image_data" id="image_data">
+			<button type="button" id="start-btn" onclick="startCapture()">Start Verification</button>
+			<button type="submit" id="sub" style="display:none;" disabled>Verifying...</button>
+		</form>
+	</div>
+
+	<script>
+		const video = document.getElementById('video');
+		const canvas = document.getElementById('canvas');
+		const progress = document.getElementById('capture-progress');
+		const startBtn = document.getElementById('start-btn');
+		const submitBtn = document.getElementById('sub');
+		const imageDataField = document.getElementById('image_data');
+		const form = document.getElementById('verify-form');
+
+		// ~2.5 seconds of frames at 100ms apart == 25 frames, within the
+		// 20-30 frame / 2-3 second window the liveness check expects.
+		const NUM_FRAMES = 25;
+		const FRAME_INTERVAL_MS = 100;
+		const capturedFrames = [];
+		let stream = null;
+
+		navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } })
+			.then(s => {
+				stream = s;
+				video.srcObject = s;
+			})
+			.catch(err => {
+				progress.textContent = "Camera access is required to verify. Please allow camera permissions and reload the page.";
+				startBtn.disabled = true;
+			});
+
+		function captureFrame() {
+			const ctx = canvas.getContext('2d');
+			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+			return canvas.toDataURL('image/jpeg', 0.7);
+		}
+
+		function startCapture() {
+			if (!stream) return;
+			startBtn.disabled = true;
+			capturedFrames.length = 0;
+			let framesTaken = 0;
+
+			progress.textContent = "Recording... please perform the challenge above now.";
+
+			const interval = setInterval(() => {
+				capturedFrames.push(captureFrame());
+				framesTaken++;
+				progress.textContent = `Recording... ${framesTaken} of ${NUM_FRAMES}`;
+
+				if (framesTaken >= NUM_FRAMES) {
+					clearInterval(interval);
+					progress.textContent = "Verifying, please wait...";
+					imageDataField.value = JSON.stringify(capturedFrames);
+					startBtn.style.display = 'none';
+					submitBtn.style.display = 'inline-block';
+					submitBtn.disabled = false;
+					// Submit automatically -- the whole point of a
+					// challenge-response check is that the captured
+					// sequence is what gets verified, not a frame the
+					// user gets to pick after the fact.
+					form.submit();
+				}
+			}, FRAME_INTERVAL_MS);
+		}
+	</script>
+
+</body>
+
+</html>

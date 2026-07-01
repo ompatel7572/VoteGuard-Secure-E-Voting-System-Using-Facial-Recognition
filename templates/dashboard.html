@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        input {
+            border: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 70, 0, 1);
+            overflow: hidden;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* ===== Page container ===== */
+        .container {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 1280px;
+            height: 800px;
+            overflow: hidden;
+            background-color: #004600;
+        }
+
+        .web-1280-4-mYq {
+            width: 1280px;
+            height: 80rem;
+            position: relative;
+            overflow: hidden;
+            background-color: #004600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            zoom: 110%;
+        }
+
+        /* ===== Header ===== */
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .btn-login {
+            background-color: rgba(148, 195, 88, 1);
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        main {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        /* ===== Profile card ===== */
+        .user-interface-2oX {
+            width: 85.6rem;
+            height: 43rem;
+            position: absolute;
+            left: 8.8rem;
+            top: 8rem;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH {
+            margin-bottom: 2.2rem;
+            width: 100%;
+            height: 26.1rem;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF {
+            margin-right: 2.25rem;
+            width: 26.75rem;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .profilebg-3Cq {
+            width: 26.7rem;
+            height: 26.1rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #ffffff;
+            border-radius: 1rem;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .profile-backdrop-NF7 {
+            width: 11.6rem;
+            height: 11.7rem;
+            position: absolute;
+            left: 7.6rem;
+            top: 1.9rem;
+            object-fit: contain;
+            vertical-align: top;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-3-1J5 {
+            width: 6.2rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 1.7rem;
+            top: 20.6rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-3-1J5 .district--wBj {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-3-1J5 .a-4GM {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-2-ojj {
+            width: 10.4rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 1.7rem;
+            top: 22.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-2-ojj .status--LDs {
+            margin-right: 1.3rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .item-2-ojj .not-voted-GdK {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .div-cah {
+            width: 26.7rem;
+            height: 0.2rem;
+            position: absolute;
+            left: 0.05rem;
+            top: 17.35rem;
+            background-color: rgba(112, 112, 112, 0.200000003);
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .profile-JFF .folayowon-oladapo-MHP {
+            width: 16.3rem;
+            height: 2.4rem;
+            position: absolute;
+            left: 5.2rem;
+            top: 14.3rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        #_266033_1 {
+            position: relative;
+            top: 32px;
+            width: 78px;
+            height: 90px;
+        }
+
+        /* ===== General information card ===== */
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH {
+            box-sizing: border-box;
+            padding: 2.2rem 2.35rem 4.6rem 1.8rem;
+            width: 56.6rem;
+            height: 100%;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .top-cop-B1X {
+            margin: 0rem 36.35rem 1.8rem 0rem;
+            width: calc(100% - 36.35rem);
+            display: flex;
+            align-items: flex-start;
+            border-radius: 0.1rem;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .top-cop-B1X .cop-i1T {
+            margin: 0.1rem 0.3rem 0rem 0rem;
+            width: 1.5rem;
+            height: 1.6rem;
+            position: relative;
+            border-radius: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .top-cop-B1X .cop-i1T .cop-SCM {
+            width: 1.2rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 0.4rem;
+            border: solid 0.1rem #000000;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 0.1rem;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .top-cop-B1X .cop-i1T .cop-LoX {
+            width: 1.2rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 0.3rem;
+            top: 0;
+            border: solid 0.1rem #000000;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 0.1rem;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .top-cop-B1X .general-information-4Dj {
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD {
+            width: 100%;
+            height: 15.4rem;
+            position: relative;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .ans-sws {
+            width: 19rem;
+            height: 13.4rem;
+            position: absolute;
+            left: 18.2rem;
+            top: 0.9rem;
+            text-align: left;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .ans-sws .nk-sacco-limited-po-box-12196-oad {
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            text-transform: capitalize;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .ans-sws .item-2022-KYy {
+            margin-bottom: 1.9rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            text-transform: capitalize;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .ans-sws .male-FhX {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            text-transform: capitalize;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .colon-h3j {
+            width: 0.3rem;
+            height: 13.4rem;
+            position: absolute;
+            left: 16.4rem;
+            top: 0.9rem;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .colon-h3j .item--cwP {
+            margin-bottom: 1.9rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .colon-h3j .item--m3b {
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .colon-h3j .item--e7P {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .quest-juX {
+            width: 4.6rem;
+            height: 13.4rem;
+            position: absolute;
+            left: 0.8rem;
+            top: 0.9rem;
+            text-align: left;
+            font-size: large;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .quest-juX .address-foB {
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .quest-juX .year-cTX {
+            margin-bottom: 1.9rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        .user-interface-2oX .auto-group-6h41-xSH .general-enH .tab-NkD .quest-juX .gender-Yc5 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.0909090909;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+        }
+
+        /* ===== Result information card ===== */
+        .user-interface-2oX .other-xA1 {
+            box-sizing: border-box;
+            padding: 2.4rem 1.8rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            flex-shrink: 0;
+            height: 165px;
+        }
+
+        .user-interface-2oX .other-xA1 .auto-group-kmrv-Vvd {
+            margin: 0rem 67.2rem 1.4rem 0rem;
+            width: calc(100% - 67.2rem);
+            display: flex;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .other-xA1 .auto-group-kmrv-Vvd .cop-E7X {
+            margin: 0.1rem 0.3rem 0rem 0rem;
+            width: 1.5rem;
+            height: 1.6rem;
+            position: relative;
+            border-radius: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .user-interface-2oX .other-xA1 .auto-group-kmrv-Vvd .cop-E7X .cop-NDj {
+            width: 1.2rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 0.4rem;
+            border: solid 0.1rem #000000;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 0.1rem;
+        }
+
+        .user-interface-2oX .other-xA1 .auto-group-kmrv-Vvd .cop-E7X .cop-VJM {
+            width: 1.2rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 0.3rem;
+            top: 0;
+            border: solid 0.1rem #000000;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border-radius: 0.1rem;
+        }
+
+        .user-interface-2oX .other-xA1 .auto-group-kmrv-Vvd .other-information-QAR {
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            margin-left: 148px;
+            margin-top: 2px;
+        }
+
+        /* ===== Live polls card ===== */
+        .live-28V {
+            box-sizing: border-box;
+            padding: 1.8rem 0.9rem 3rem 1.2rem;
+            width: 22.5rem;
+            height: 44.5rem;
+            cursor: pointer;
+            position: absolute;
+            left: 96.7rem;
+            top: 8rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+        }
+
+        .live-28V .live-elect-8SR {
+            margin: 0rem 6.1rem 1.1rem 0rem;
+            width: calc(100% - 6.1rem);
+            display: flex;
+            align-items: center;
+        }
+
+        .live-28V .live-elect-8SR .live-TzV {
+            margin: 0rem 1rem 0.1rem 0rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            object-fit: contain;
+            vertical-align: top;
+            flex-shrink: 0;
+        }
+
+        .live-28V .live-elect-8SR .auto-group-qsar-CSH {
+            margin-top: 0.1rem;
+            box-sizing: border-box;
+            padding-top: 0.1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .live-28V .active-VRP {
+            width: 100%;
+            height: 2.5rem;
+            position: relative;
+        }
+
+        .live-28V .active-VRP+.active-VRP {
+            margin-top: 15px;
+        }
+
+        .live-28V .active-VRP .bg-3ho {
+            width: 20.1rem;
+            height: 2.5rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgba(148, 195, 88, 0.6999999881);
+            border-radius: 0.4rem;
+        }
+
+        .live-28V .active-VRP .ends-11-33hrs-z7F {
+            width: 5.8rem;
+            height: 1.2rem;
+            position: absolute;
+            left: 14.6rem;
+            top: 0.7rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .live-28V .active-VRP .ends-11-33hrs-z7F .ends-11-33hrs-z7F-sub-1 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.5;
+            text-transform: uppercase;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+        }
+
+        .live-28V .active-VRP .ends-11-33hrs-z7F .ends-11-33hrs-z7F-sub-2 {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+        }
+
+        .live-28V .active-VRP .presidential-election-k8M {
+            width: 8rem;
+            height: -0.8rem;
+            position: absolute;
+            left: 1.6rem;
+            top: 5.5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            line-height: 1.5;
+            text-transform: capitalize;
+            color: #000000;
+            font-family: Poppins, 'Source Sans Pro';
+            white-space: nowrap;
+            text-align: left;
+        }
+
+        .live-28V .active-VRP .dot-rBP {
+            width: 0.4rem;
+            height: 0.4rem;
+            position: absolute;
+            left: 0.8rem;
+            top: 1.1rem;
+            background-color: #004600;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <header style="font-size: 16px;">
+        <div class="title">
+            <a href="/" style="text-decoration: none;">VoteGuard</a>
+        </div>
+        <div style="display: flex; align-items: center; position: relative;">
+            <div style=" display: flex; position: relative;
+            gap: 10px;
+            margin-bottom: -7px; ">
+                <a href="https://drive.google.com/drive/folders/1tntLUocVSIpiVYBc1T5kuSkSxqhMTKvj?usp=sharing"
+                    class="nav-link" style="margin-right: 10px;">About us</a>
+                <a href="https://youtu.be/5RaClayE1nM" class="nav-link" style="margin-right: 10px;">How to Vote</a>
+            </div>
+            <button class="btn-login" style="margin-left: 10px;"><a href="/logout">Logout</a></button>
+        </div>
+
+    </header>
+    <main>
+        <div class="web-1280-4-mYq">
+            <div class="user-interface-2oX">
+                <div class="auto-group-6h41-xSH">
+                    <div class="profile-JFF">
+                        <div class="profilebg-3Cq">
+                        </div>
+                        <img class="profile-backdrop-NF7" src="/static/backdrop.png">
+                        <img src="/static/_266033_1.png" nameid="266033 1" id="_266033_1">
+                        <div class="item-3-1J5">
+                            <p class="district--wBj">Name:</p>
+                            <p class="a-4GM">{{ user.name }}</p>
+                        </div>
+                        <div class="item-2-ojj">
+                            <p class="status--LDs">Status:</p>
+                            <p class="not-voted-GdK">Not voted</p>
+                        </div>
+
+                        <div class="div-cah">
+                        </div>
+                        <p class="folayowon-oladapo-MHP">{{user.name}}</p>
+                    </div>
+                    <div class="general-enH">
+                        <div class="top-cop-B1X">
+                            <div class="cop-i1T">
+                                <div class="cop-SCM">
+                                </div>
+                                <div class="cop-LoX">
+                                </div>
+                            </div>
+                            <p class="general-information-4Dj">General Information</p>
+                        </div>
+                        <div class="tab-NkD">
+
+                            <div class="ans-sws">
+                                <p class="nk-sacco-limited-po-box-12196-oad"> {{user.name}}</p>
+                                <p class="item-2022-KYy">{{user.dob}}</p>
+                                <p class="male-FhX">{{user.email}}</p>
+
+
+                            </div>
+                            <div class="colon-h3j">
+                                <p class="item--cwP">:</p>
+                                <p class="item--m3b">:</p>
+
+                                <p class="item--e7P">:</p>
+
+                            </div>
+                            <div class="quest-juX">
+                                <p class="address-foB">Name</p>
+                                <p class="year-cTX">DOB</p>
+                                <p class="gender-Yc5">Email</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-xA1">
+                    <div class="auto-group-kmrv-Vvd">
+                        <div class="cop-E7X">
+                            <div class="cop-NDj">
+                            </div>
+                            <div class="cop-VJM">
+                            </div>
+                        </div>
+                        <p class="other-information-QAR">Result Information
+                        <p class="error">{{ error }}</p>
+                        </p>
+                    </div>
+                    <div>
+                        <form method="post" action="/get_result">
+                            <select name="poll_id" id="poll_id"
+                                style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 20px; width: 100%; box-sizing: border-box;">
+                                {% for poll in polls %}
+                                <option value="{{ poll.id }}">{{ poll.question }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit"
+                                style="padding: 10px; background-color: #4CAF50; color: white; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; width: 40%; box-sizing: border-box; transition: background-color 0.3s;">Submit</button>
+                        </form>
+
+                        {% if selected_question and selected_options %}
+                        <h2>Selected Poll Question:</h2>
+                        <p>{{ selected_question }}</p>
+
+                        <h2>Selected Poll Options:</h2>
+                        <ul>
+                            {% for option in selected_options %}
+                            <li>{{ option }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-28V">
+                <div class="live-elect-8SR">
+                    <img class="live-TzV" src="/static/live1.png">
+                    <div class="auto-group-qsar-CSH">Live Polls</div>
+                </div>
+
+                {% for poll in allowed_polls %}
+
+                <div class="active-VRP">
+                    <div class="bg-3ho">
+                    </div>
+                    <p class="ends-11-33hrs-z7F">
+                        <span class="ends-11-33hrs-z7F-sub-1"> </span>
+                        <span class="ends-11-33hrs-z7F-sub-2"> </span>
+                    </p>
+                    <a href="/redirect_to_poll/{{poll.id}}" class="presidential-election-link-k8M">
+                        <p class="presidential-election-k8M">{{poll.question}}</p>
+                        <div class="dot-rBP">
+                        </div>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </main>
+
+
+
+</body>
+
+</html>

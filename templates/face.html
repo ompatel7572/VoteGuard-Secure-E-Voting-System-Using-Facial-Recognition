@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>VoteGuard - Face Registration</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+			font-family: 'Poppins', sans-serif;
+			overflow-x: hidden;
+			background-color: rgba(0, 70, 0, 1);
+		}
+
+		header {
+			background-color: #ffffff;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.btn-login {
+			background-color: rgba(148, 195, 88, 1);
+			color: #ffffff;
+			font-size: 16px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			display: block;
+			margin-bottom: 5px;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		#content-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			max-width: 600px;
+			margin: 60px auto;
+			background: #ffffff;
+			border-radius: 10px;
+			padding: 40px;
+			box-sizing: border-box;
+		}
+
+		#voting_panel {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 700;
+			font-size: 32px;
+			color: rgba(0, 70, 0, 1);
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		#subtext {
+			color: #555;
+			text-align: center;
+			margin-bottom: 20px;
+			font-size: 14px;
+		}
+
+		#camera-wrap {
+			position: relative;
+			width: 320px;
+			height: 240px;
+			border-radius: 10px;
+			overflow: hidden;
+			background: #000;
+			margin-bottom: 20px;
+		}
+
+		#video {
+			width: 320px;
+			height: 240px;
+			object-fit: cover;
+			display: block;
+		}
+
+		#capture-progress {
+			font-size: 14px;
+			color: rgba(0, 70, 0, 1);
+			font-weight: bold;
+			margin-bottom: 15px;
+			min-height: 20px;
+		}
+
+		#status-error {
+			color: #b00020;
+			font-size: 14px;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+
+		#sub {
+			background-color: rgba(133, 198, 72, 1);
+			color: #ffffff;
+			font-family: Poppins;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 12px 32px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		#sub:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header style="font-size: 16px;">
+		<div class="title" style="position: relative;">
+			<a href="/" style="text-decoration: none;">VoteGuard</a>
+		</div>
+		<div style="display: flex; align-items: center; position: relative;">
+			<div style="display: flex; position: relative; gap: 10px; margin-bottom: -7px;">
+				<a href="https://drive.google.com/drive/folders/1tntLUocVSIpiVYBc1T5kuSkSxqhMTKvj?usp=sharing" class="nav-link" style="margin-right: 10px;">About us</a>
+				<a href="https://youtu.be/5RaClayE1nM" class="nav-link" style="margin-right: 10px;">How to Vote</a>
+			</div>
+			<button class="btn-login" style="margin-left: 10px;"><a href="/logout" style="color:#fff;">Logout</a></button>
+		</div>
+	</header>
+
+	<div id="content-container">
+		<div id="voting_panel">Register Your Face</div>
+		<div id="subtext">We'll capture 5 quick photos to link your face to your account. This is used to verify it's really you when you vote.</div>
+
+		{% if error %}
+		<div id="status-error">{{ error }}</div>
+		{% endif %}
+
+		<div id="camera-wrap">
+			<video id="video" autoplay playsinline muted></video>
+		</div>
+		<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+		<div id="capture-progress">Position your face in frame, then click Start</div>
+
+		<form action="/face" method="POST" id="face-form">
+			<input type="hidden" name="image_data" id="image_data">
+			<button type="button" id="start-btn" onclick="startCapture()">Start Capture</button>
+			<input type="submit" value="Register" id="sub" style="display:none;">
+		</form>
+	</div>
+
+	<script>
+		const video = document.getElementById('video');
+		const canvas = document.getElementById('canvas');
+		const progress = document.getElementById('capture-progress');
+		const startBtn = document.getElementById('start-btn');
+		const submitBtn = document.getElementById('sub');
+		const imageDataField = document.getElementById('image_data');
+
+		const NUM_SHOTS = 5;
+		const capturedImages = [];
+		let stream = null;
+
+		// Ask for camera access as soon as the page loads.
+		navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } })
+			.then(s => {
+				stream = s;
+				video.srcObject = s;
+			})
+			.catch(err => {
+				progress.textContent = "Camera access is required to register. Please allow camera permissions and reload the page.";
+				startBtn.disabled = true;
+			});
+
+		function captureFrame() {
+			const ctx = canvas.getContext('2d');
+			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+			return canvas.toDataURL('image/jpeg', 0.85);
+		}
+
+		function startCapture() {
+			if (!stream) return;
+			startBtn.disabled = true;
+			capturedImages.length = 0;
+			let shotsTaken = 0;
+
+			const interval = setInterval(() => {
+				capturedImages.push(captureFrame());
+				shotsTaken++;
+				progress.textContent = `Captured ${shotsTaken} of ${NUM_SHOTS} photos...`;
+
+				if (shotsTaken >= NUM_SHOTS) {
+					clearInterval(interval);
+					progress.textContent = "All photos captured. Click Register to finish.";
+					imageDataField.value = JSON.stringify(capturedImages);
+					submitBtn.style.display = 'inline-block';
+					startBtn.style.display = 'none';
+				}
+			}, 700);
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>VoteGuard - Verification Failed</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+			font-family: 'Poppins', sans-serif;
+			overflow-x: hidden;
+			background-color: rgba(0, 70, 0, 1);
+		}
+
+		header {
+			background-color: #ffffff;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.btn-login {
+			background-color: rgba(148, 195, 88, 1);
+			color: #ffffff;
+			font-size: 16px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			display: block;
+			margin-bottom: 5px;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		#content-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			max-width: 500px;
+			margin: 80px auto;
+			background: #ffffff;
+			border-radius: 10px;
+			padding: 40px;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		#icon {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			background: #ffe0e0;
+			color: #b00020;
+			font-size: 36px;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 20px auto;
+		}
+
+		#voting_panel {
+			font-family: 'Poppins', sans-serif;
+			font-weight: 700;
+			font-size: 26px;
+			color: #b00020;
+			margin-bottom: 10px;
+		}
+
+		#subtext {
+			color: #555;
+			margin-bottom: 25px;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		.btn-row {
+			display: flex;
+			gap: 12px;
+			justify-content: center;
+		}
+
+		#retry {
+			background-color: rgba(133, 198, 72, 1);
+			color: #ffffff;
+			font-family: Poppins;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 12px 24px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		#dashboard-link {
+			background-color: #eeeeee;
+			color: #333;
+			font-family: Poppins;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 12px 24px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header style="font-size: 16px;">
+		<div class="title" style="position: relative;">
+			<a href="/" style="text-decoration: none;">VoteGuard</a>
+		</div>
+		<div style="display: flex; align-items: center; position: relative;">
+			<div style="display: flex; position: relative; gap: 10px; margin-bottom: -7px;">
+				<a href="https://drive.google.com/drive/folders/1tntLUocVSIpiVYBc1T5kuSkSxqhMTKvj?usp=sharing" class="nav-link" style="margin-right: 10px;">About us</a>
+				<a href="https://youtu.be/5RaClayE1nM" class="nav-link" style="margin-right: 10px;">How to Vote</a>
+			</div>
+			<button class="btn-login" style="margin-left: 10px;"><a href="/logout" style="color:#fff;">Logout</a></button>
+		</div>
+	</header>
+
+	<div id="content-container">
+		<div id="icon">&times;</div>
+		<div id="voting_panel">Verification Failed</div>
+		<div id="subtext">We couldn't match your face to the one on file. Make sure you're in good lighting and looking directly at the camera, then try again.</div>
+		<div class="btn-row">
+			{% if poll_id %}
+			<form action="/redirect_to_poll/{{ poll_id }}" method="GET" style="margin:0;">
+				<button type="submit" id="retry">Try Again</button>
+			</form>
+			{% endif %}
+			<form action="/dashboard" method="GET" style="margin:0;">
+				<button type="submit" id="dashboard-link">Back to Dashboard</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

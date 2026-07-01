@@ -8,7 +8,7 @@ The system has two roles — **Admin** (creates and manages elections) and **Vot
 
 ---
 
-## 📸 Screenshots
+## 📸 UI Screenshots
 
 <p align="center">
 <img src="docs/ui.png" width="800">
